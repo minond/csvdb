@@ -29,4 +29,29 @@ public class Source {
   public String readLine() throws IOException {
     return raf.readLine();
   }
+
+  public void writeLine(String line, int row) throws IOException {
+    long orig = raf.getFilePointer();
+
+    raf.seek(0);
+
+    for (int i = 0, len = row; i < len; i++) {
+      readLine();
+    }
+
+    raf.writeBytes(line);
+    raf.seek(orig);
+  }
+
+  public void writeLine(String line, long loc) throws IOException {
+    long orig = raf.getFilePointer();
+
+    raf.seek(loc);
+    raf.writeBytes(line);
+    raf.seek(orig);
+  }
+
+  public void appendLine(String line) throws IOException {
+    writeLine(line, raf.length());
+  }
 }
