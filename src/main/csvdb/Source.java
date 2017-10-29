@@ -8,20 +8,12 @@ import java.io.IOException;
 public class Source {
   protected BufferedReader buf;
 
-  public Source(String path) {
-    try {
-      FileReader fread = new FileReader(path);
-      buf = new BufferedReader(fread);
-    } catch (Exception err) {
-      err.printStackTrace();
-    }
+  public Source(String path) throws Exception {
+    FileReader fread = new FileReader(path);
+    buf = new BufferedReader(fread);
   }
 
-  public String readLine() {
-    try {
-      return buf.readLine();
-    } catch (Exception err) {
-      return null;
-    }
+  public String readLine() throws Exception {
+    return buf.readLine();
   }
 }

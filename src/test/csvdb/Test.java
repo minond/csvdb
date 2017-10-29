@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Test {
-  public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+  public static void main(String[] args) throws Exception {
     System.out.println("Running tests");
     (new ParserTests()).runTests();
     (new SourceTests()).runTests();
@@ -15,7 +15,7 @@ public class Test {
   }
 
   static class Tester {
-    public void runTests() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public void runTests() throws Exception {
       String klass = this.getClass().getName();
 
       for (String method : this.getTests()) {
@@ -67,9 +67,13 @@ public class Test {
   }
 
   static class SourceTests extends Tester {
-    protected Source makefile = new Source("./Makefile");
+    protected Source makefile;
 
-    public void testReadingLines() {
+    public SourceTests() throws Exception {
+      makefile = new Source("./Makefile");
+    }
+
+    public void testReadingLines() throws Exception {
       assert makefile.readLine().equals(".PHONY: build test");
       assert makefile.readLine().equals("");
       assert makefile.readLine().equals("build: prep");
