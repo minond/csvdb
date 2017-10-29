@@ -2,6 +2,10 @@ package csvdb;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("Hi");
+    SvParser parser = new SvParser();
+    System.out.println(parser.parseLine("one,two,three"));
+    System.out.println(parser.parseLine("  one         ,    two ,    three    "));
+    System.out.println(parser.parseLine("  o\\ne         ,  \\two ,    thre\\e  "));
+    System.out.println(parser.parseLine("\"one\",\"two\",\"three\""));
   }
 }

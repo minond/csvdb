@@ -1,5 +1,5 @@
 .PHONY: build
 build:
 	@if [ ! -d classes ]; then mkdir classes; fi
-	javac src/main/csvdb/Main.java -d classes
+	javac -d classes src/main/csvdb/*.java
 	java -cp ./classes csvdb/Main
