@@ -3,14 +3,14 @@ package csvdb;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SvParser {
+public class Parser {
   protected char delimeter;
 
-  public SvParser() {
+  public Parser() {
     this(',');
   }
 
-  public SvParser(char delimeter) {
+  public Parser(char delimeter) {
     this.delimeter = delimeter;
   }
 

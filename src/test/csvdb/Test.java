@@ -3,7 +3,7 @@ package csvdb;
 import java.util.Arrays;
 
 public class Test {
-  protected SvParser parser = new SvParser();
+  protected Parser parser = new Parser();
 
   public static void main(String[] args) {
     Test test = new Test();
