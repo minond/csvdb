@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SvParser {
-  public static final char DELIM_COMMA = ',';
-
   protected char delimeter;
 
   public SvParser() {
-    this(DELIM_COMMA);
+    this(',');
   }
 
   public SvParser(char delimeter) {
