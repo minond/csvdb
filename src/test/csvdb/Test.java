@@ -1,6 +1,5 @@
 package csvdb;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +18,7 @@ public class Test {
       String klass = this.getClass().getName();
 
       for (String method : this.getTests()) {
-        System.out.printf("Running %s.%s... ", klass, method);
+        System.out.printf("Running %s.%-36s ", klass, method);
         Method m = this.getClass().getMethod(method);
         m.invoke(this);
         System.out.printf("OK\n");
@@ -63,6 +62,21 @@ public class Test {
     public void testDelimeterInQuotes() {
       assert Arrays.asList("one", "tw,o", "three", ",,,", "four")
         .equals(parser.parseLine("one, \"tw,o\",three,\",,,\",four"));
+    }
+
+    public void testCommasWithAValue() {
+      assert Arrays.asList("", "", "", "one", "", "", "")
+        .equals(parser.parseLine(",,,one,,,"));
+    }
+
+    public void testCommasWithAQuoatedValue() {
+      assert Arrays.asList("", "", "", "o,n,e", "", "", "")
+        .equals(parser.parseLine(",,,\"o,n,e\",,,"));
+    }
+
+    public void testJustCommas() {
+      assert Arrays.asList("", "", "", "", "", "")
+        .equals(parser.parseLine(",,,,,"));
     }
   }
 
