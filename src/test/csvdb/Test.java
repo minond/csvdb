@@ -10,6 +10,7 @@ public class Test {
   public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
     System.out.println("Running tests");
     (new ParserTests()).runTests();
+    (new SourceTests()).runTests();
     System.out.println("Done, all tests passed!");
   }
 
@@ -62,6 +63,19 @@ public class Test {
     public void testDelimeterInQuotes() {
       assert Arrays.asList("one", "tw,o", "three", ",,,", "four")
         .equals(parser.parseLine("one, \"tw,o\",three,\",,,\",four"));
+    }
+  }
+
+  static class SourceTests extends Tester {
+    protected Source makefile = new Source("./Makefile");
+
+    public void testReadingLines() {
+      assert makefile.readLine().equals(".PHONY: build test");
+      assert makefile.readLine().equals("");
+      assert makefile.readLine().equals("build: prep");
+      assert makefile.readLine().equals("\tjavac -d classes src/main/csvdb/*.java");
+      assert makefile.readLine().equals("\tjava -cp ./classes csvdb/Main");
+      assert makefile.readLine().equals("");
     }
   }
 }
