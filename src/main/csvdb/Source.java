@@ -12,14 +12,16 @@ public class Source {
     try {
       FileReader fread = new FileReader(path);
       buf = new BufferedReader(fread);
-    } catch (Exception err) {}
+    } catch (Exception err) {
+      err.printStackTrace();
+    }
   }
 
   public String readLine() {
     try {
       return buf.readLine();
     } catch (Exception err) {
-      return "";
+      return null;
     }
   }
 }
