@@ -20,8 +20,8 @@ public class Test {
       for (String method : this.getTests()) {
         System.out.printf("Running %s.%s... ", klass, method);
         Method m = this.getClass().getMethod(method);
-        System.out.printf("OK\n");
         m.invoke(this);
+        System.out.printf("OK\n");
       }
     }
 
