@@ -1,19 +1,32 @@
 package csvdb;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class Source {
-  protected BufferedReader buf;
+  protected File file;
+  protected RandomAccessFile raf;
 
-  public Source(String path) throws Exception {
-    FileReader fread = new FileReader(path);
-    buf = new BufferedReader(fread);
+  public Source(String path) {
+    file = new File(path);
   }
 
-  public String readLine() throws Exception {
-    return buf.readLine();
+  public void open() throws IOException {
+    if (!file.exists()) {
+      file.getParentFile().mkdirs();
+      file.createNewFile();
+    }
+
+    raf = new RandomAccessFile(file, "rw");
+  }
+
+  public void close() throws IOException {
+    raf.close();
+  }
+
+  public String readLine() throws IOException {
+    return raf.readLine();
   }
 }

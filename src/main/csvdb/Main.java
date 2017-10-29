@@ -6,6 +6,8 @@ public class Main {
 
     Source s = new Source("./Makefile");
 
+    s.open();
+
     System.out.println(s.readLine());
     System.out.println(s.readLine());
     System.out.println(s.readLine());

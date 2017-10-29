@@ -71,6 +71,7 @@ public class Test {
 
     public SourceTests() throws Exception {
       makefile = new Source("./Makefile");
+      makefile.open();
     }
 
     public void testReadingLines() throws Exception {
