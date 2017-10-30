@@ -42,30 +42,30 @@ public class Main {
     dataFile.close();
   }
 
-  public static void update(String file, String id, String field, String value) throws Exception {
+  public static void update(String file, String id, String field, String updateValue) throws Exception {
     Source dataFile = new Source(file);
     Parser parser = new Parser();
 
-    String line = "";
-    int lineCounter = 0;
-
     dataFile.open();
     System.out.printf("Searching for record with an id of %s in %s and setting %s to %s.\n",
-      id, file, field, value);
+      id, file, field, updateValue);
+
+    String line = "";
+    int lineCounter = 0;
+    int fieldColumn = getColumnIndex(parser, dataFile, field);
 
     for (; (line = dataFile.readLine()) != null; lineCounter++) {
       List<String> parts = parser.parseLine(line);
 
       if (parts.get(0).equals(id)) {
-        System.out.printf("Found record in line %s: ", lineCounter);
-        System.out.println(parts);
-        // System.out.println("Incrementing age value by one");
+        System.out.printf("Found record in line %s\n", lineCounter);
+        System.out.printf("Original value of %s: %s\n", field, parts.get(fieldColumn));
 
-        // int age = Integer.parseInt(parts.get(3)) + 1;
-        // parts.set(3, String.valueOf(age));
-        //
-        // String update = parser.encodeLine(parts);
-        // dataFile.writeLine(update, lineCounter);
+        parts.set(fieldColumn, updateValue);
+        String update = parser.encodeLine(parts);
+        dataFile.writeLine(update, lineCounter);
+
+        System.out.printf("Updated value of %s: %s\n", field, updateValue);
 
         break;
       }

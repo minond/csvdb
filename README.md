@@ -33,6 +33,6 @@ handling. We could let students write a `main(...) throws Exception` method in
 the beginning, which would crash on any and every error, but add better and
 more specific error handling in the future.
 
-This is a working example. To build and execute, run `make`. Run `make test` to
-run tests. Idea credit goes to the awesome
+This is a working example. To build and execute, run `make` and `make exec`.
+Run `make test` to run tests. Idea credit goes to the awesome
 [@MohamedDataStruct](https://github.com/MohamedDataStruct).
