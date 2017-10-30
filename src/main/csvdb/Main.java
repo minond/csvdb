@@ -25,6 +25,15 @@ public class Main {
       if (parts.get(0).equals(id)) {
         System.out.printf("Found record in line %s: ", lineCounter);
         System.out.println(parts);
+        System.out.println("Incrementing age value by one");
+
+        int age = Integer.parseInt(parts.get(3)) + 1;
+        parts.set(3, String.valueOf(age));
+
+        String update = parser.encodeLine(parts);
+        dataFile.writeLine(update, lineCounter);
+
+        break;
       }
     }
 

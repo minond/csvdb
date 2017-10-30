@@ -8,6 +8,7 @@ import java.io.RandomAccessFile;
 public class Source {
   protected File file;
   protected RandomAccessFile raf;
+  protected String eol = System.getProperty("line.separator");
 
   public Source(String path) {
     file = new File(path);
@@ -31,28 +32,24 @@ public class Source {
     return raf.readLine();
   }
 
-  public void writeLine(String line, int row) throws IOException {
-    long orig = raf.getFilePointer();
-
+  public void writeLine(String update, int row) throws IOException {
     raf.seek(0);
 
-    for (int i = 0, len = row; i < len; i++) {
-      readLine();
+    StringBuilder buf = new StringBuilder();
+    String line = "";
+    int lineCounter = 0;
+
+    for (; (line = readLine()) != null; lineCounter++) {
+      buf.append(lineCounter == row ? update : line);
+      buf.append(eol);
     }
 
-    raf.writeBytes(line);
-    raf.seek(orig);
-  }
-
-  public void writeLine(String line, long loc) throws IOException {
-    long orig = raf.getFilePointer();
-
-    raf.seek(loc);
-    raf.writeBytes(line);
-    raf.seek(orig);
+    raf.seek(0);
+    raf.writeBytes(buf.toString().trim());
   }
 
   public void appendLine(String line) throws IOException {
-    writeLine(line, raf.length());
+    raf.seek(raf.length());
+    raf.writeBytes(eol + line.trim());
   }
 }

@@ -51,4 +51,18 @@ public class Parser {
 
     return parts;
   }
+
+  public String encodeLine(List<String> parts) {
+    StringBuilder buf = new StringBuilder();
+
+    for (int i = 0, len = parts.size(); i < len; i++) {
+      if (i != 0) {
+        buf.append(delimeter);
+      }
+
+      buf.append("\"" + parts.get(i).replace("\"", "\\\"") + "\"");
+    }
+
+    return buf.toString().trim();
+  }
 }
