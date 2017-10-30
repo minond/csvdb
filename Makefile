@@ -2,7 +2,7 @@
 
 build: prep
 	javac -d classes src/main/csvdb/*.java
-	java -cp ./classes csvdb/Main
+	java -cp ./classes csvdb/Main read ./data.csv 00005 first_name
 
 test: prep
 	javac -d classes src/main/csvdb/*.java src/test/csvdb/*.java

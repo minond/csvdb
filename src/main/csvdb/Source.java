@@ -32,6 +32,11 @@ public class Source {
     return raf.readLine();
   }
 
+  public String readLine(long offset) throws IOException {
+    raf.seek(offset);
+    return raf.readLine();
+  }
+
   public void writeLine(String update, int row) throws IOException {
     raf.seek(0);
 
