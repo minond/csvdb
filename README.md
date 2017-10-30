@@ -1,4 +1,4 @@
-# Module project proof of concept
+## Module project proof of concept
 
 This is a proof of concept for what we use as the project for Module 6 of the
 UtahRETC Java Class. Summary of the project: build a generic CRM cli project
