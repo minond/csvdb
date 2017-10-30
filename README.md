@@ -1,4 +1,8 @@
-## Module project proof of concept
+# Module project proof of concept
+
+This is a proof of concept for what we use as the project for Module 6 of the
+UtahRETC Java Class. Idea credit goes to
+[@MohamedDataStruct](https://github.com/MohamedDataStruct).
 
 We could provide `csvdb.Parser` and `csvdb.Source` (or something like them that
 lets us read and write to a CSV) and let students write the logic found in
@@ -18,10 +22,9 @@ java -cp ./classes csvdb/Main read ./data.csv 00005 first_name
 java -cp ./classes csvdb/Main update ./data.csv 00005 age 98
 ```
 
-
 This would test them on loops (looping over rows until the right one is found),
 conditionals (comparing values), storing state in variables (tracking the
 column that is being requested or updates), and data types/casting (string to
 int for increment/decrement).
 
-Run `make` to build and execute and `make test` to run tests.
+Run `make` to build and execute, and `make test` to run tests.
