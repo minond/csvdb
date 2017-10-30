@@ -1,45 +1,33 @@
 package csvdb;
 
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
   public static void main(String[] args) throws Exception {
-    System.out.println("CsvDB");
+    Scanner io = new Scanner(System.in);
+    Source dataFile = new Source("./data.csv");
+    Parser parser = new Parser();
 
-    Source s = new Source("./data.csv");
+    System.out.printf("Id: ");
+    String id = io.next();
+    io.close();
+    System.out.printf("Searching for record with an id of %s\n", id);
 
-    s.open();
+    String line = "";
+    int lineCounter = 0;
 
-    // s.readLine();
-    // s.readLine();
-    // s.readLine();
-    // s.readLine();
-    // s.readLine();
-    s.readLine();
-    s.readLine();
-    // s.appendLine("S\n");
-    s.writeLine("123\n", 0);
-    s.writeLine("123\n", 3);
+    dataFile.open();
 
-    s.close();
+    for (; (line = dataFile.readLine()) != null; lineCounter++) {
+      List<String> parts = parser.parseLine(line);
 
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
-    // System.out.println(s.readLine());
+      if (parts.get(0).equals(id)) {
+        System.out.printf("Found record in line %s: ", lineCounter);
+        System.out.println(parts);
+      }
+    }
+
+    dataFile.close();
   }
 }

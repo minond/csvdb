@@ -20,6 +20,7 @@ public class Source {
     }
 
     raf = new RandomAccessFile(file, "rw");
+    raf.getChannel().lock();
   }
 
   public void close() throws IOException {
